@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project architecture
+
+- Keep editable business identity, contact, service, and legal content in a central configuration module, and submit public enquiries only through a validated server function so presentation stays separate from business configuration and writes stay server-side.
