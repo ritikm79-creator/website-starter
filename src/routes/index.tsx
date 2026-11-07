@@ -12,7 +12,6 @@ import {
   ShieldCheck,
   X,
 } from "lucide-react";
-import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { FinancialGlobe } from "@/components/financial-globe";
