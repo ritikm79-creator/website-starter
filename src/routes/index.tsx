@@ -16,7 +16,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { FinancialGlobe } from "@/components/financial-globe";
 import { businessConfig, enquiryServices, services } from "@/lib/business-config";
-import { enquirySchema, submitEnquiry } from "@/lib/enquiries.functions";
+import { enquirySchema } from "@/lib/enquiry-schema";
+import { submitEnquiry } from "@/lib/enquiries.functions";
 
 export const Route = createFileRoute("/")({
   head: () => ({
