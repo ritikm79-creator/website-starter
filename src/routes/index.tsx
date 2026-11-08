@@ -63,6 +63,8 @@ const stages = [
   ["04", "Discuss", "Talk through your requirements and next questions."],
 ] as const;
 
+type EnquiryErrors = Partial<Record<"fullName" | "phone" | "email" | "message", string>>;
+
 function whatsappUrl(message: string) {
   const number = businessConfig.whatsappNumber.replace(/\D/g, "");
   return number ? `https://wa.me/${number}?text=${encodeURIComponent(message)}` : "";
@@ -75,7 +77,7 @@ function FinancialServicesHome() {
   const [email, setEmail] = useState("");
   const [service, setService] = useState<(typeof enquiryServices)[number]>("General Enquiry");
   const [message, setMessage] = useState("");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<EnquiryErrors>({});
   const [submitting, setSubmitting] = useState(false);
   const [formResult, setFormResult] = useState<{ success: boolean; message: string } | null>(null);
   const submitEnquiryFn = useServerFn(submitEnquiry);
@@ -85,10 +87,15 @@ function FinancialServicesHome() {
     if (submitting) return;
     const parsed = enquirySchema.safeParse({ fullName: name, phone, email, service, message });
     if (!parsed.success) {
-      const nextErrors: Record<string, string> = {};
+      const nextErrors: EnquiryErrors = {};
       parsed.error.issues.forEach((issue) => {
         const key = issue.path[0];
-        if (typeof key === "string" && !nextErrors[key]) nextErrors[key] = issue.message;
+        if (
+          (key === "fullName" || key === "phone" || key === "email" || key === "message") &&
+          !nextErrors[key]
+        ) {
+          nextErrors[key] = issue.message;
+        }
       });
       setErrors(nextErrors);
       setFormResult(null);
@@ -180,7 +187,7 @@ function FinancialServicesHome() {
                 <p className="service-kicker">{item.shortName}</p>
                 <h3>{item.title}</h3>
                 <p className="service-description">{item.description}</p>
-                {item.note && <p className="service-note"><ShieldCheck aria-hidden="true" /> {item.note}</p>}
+                {"note" in item && <p className="service-note"><ShieldCheck aria-hidden="true" /> {item.note}</p>}
                 <div className="service-features">{item.features.map((feature) => <span key={feature}><Check aria-hidden="true" />{feature}</span>)}</div>
               </div>
               <div className="service-art" aria-hidden="true"><ServiceOrbit index={Number(item.number)} /></div>
