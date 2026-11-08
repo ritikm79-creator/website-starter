@@ -1,3 +1,3 @@
-- [ ] Build responsive cinematic financial-services homepage and visual system.
-- [ ] Add validated enquiry form submission to Lovable Cloud and prove storage.
-- [ ] Verify site rendering and current build, then summarize missing business configuration.
+- [x] Build responsive cinematic financial-services homepage and visual system.
+- [x] Add validated enquiry form submission to Lovable Cloud and prove storage.
+- [ ] Remove temporary browser-test enquiry, confirm clean preview, and summarize missing business configuration.
