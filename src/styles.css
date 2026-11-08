@@ -109,6 +109,13 @@
   --paper: oklch(0.95 0.019 88);
   --paper-muted: oklch(0.83 0.02 85);
   --line-light: oklch(0.36 0.027 228);
+  --globe-surface: oklch(0.28 0.055 224);
+  --globe-wire: oklch(0.79 0.105 81);
+  --globe-points: oklch(0.89 0.065 88);
+  --globe-muted: oklch(0.68 0.045 206);
+  --globe-ambient: oklch(0.83 0.024 218);
+  --globe-key: oklch(0.83 0.105 81);
+  --globe-rim: oklch(0.61 0.075 202);
 }
 
 .dark {
@@ -348,7 +355,7 @@ a { color: inherit; text-decoration: none; }
   .wordmark-symbol { width: 34px; height: 34px; }
   .header-cta { display: none; }
   .menu-toggle { display: inline-flex; }
-  .main-nav { position: absolute; top: 69px; left: 0; right: 0; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 20px 17px; border-bottom: 1px solid var(--line-light); background: color-mix(in oklab, var(--night) 97%, transparent); }
+  .main-nav { position: absolute; top: 69px; left: 0; right: 0; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 20px 17px; border-bottom: 1px solid var(--line-light); background: var(--night); }
   .main-nav.is-open { display: flex; }
   .main-nav a { padding: 13px 0; border-bottom: 1px solid color-mix(in oklab, var(--paper) 10%, transparent); font-size: 11px; }
   .hero-section { min-height: 780px; align-items: flex-start; padding: 170px 25px 108px; }
