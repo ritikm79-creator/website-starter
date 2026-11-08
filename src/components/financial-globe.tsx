@@ -10,13 +10,17 @@ export function FinancialGlobe() {
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+    const initialWidth = Math.max(canvas.clientWidth, 1);
+    const initialHeight = Math.max(canvas.clientHeight, 1);
+    renderer.setSize(initialWidth, initialHeight, false);
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
     camera.position.set(0, 0, 8.4);
+    camera.aspect = initialWidth / initialHeight;
+    camera.updateProjectionMatrix();
     const universe = new THREE.Group();
     scene.add(universe);
 
