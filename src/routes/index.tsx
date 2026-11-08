@@ -22,7 +22,7 @@ import { submitEnquiry } from "@/lib/enquiries.functions";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Financial Services & Investment Insights | Financial Services" },
+      { title: "Financial Services & Investment Insights | IPO, Unlisted Shares & Forex" },
       {
         name: "description",
         content:

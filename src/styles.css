@@ -109,6 +109,13 @@
   --paper: oklch(0.95 0.019 88);
   --paper-muted: oklch(0.83 0.02 85);
   --line-light: oklch(0.36 0.027 228);
+  --globe-surface: oklch(0.28 0.055 224);
+  --globe-wire: oklch(0.79 0.105 81);
+  --globe-points: oklch(0.89 0.065 88);
+  --globe-muted: oklch(0.68 0.045 206);
+  --globe-ambient: oklch(0.83 0.024 218);
+  --globe-key: oklch(0.83 0.105 81);
+  --globe-rim: oklch(0.61 0.075 202);
 }
 
 .dark {
