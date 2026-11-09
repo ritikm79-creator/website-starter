@@ -3,12 +3,22 @@ import * as THREE from "three";
 
 export function FinancialGlobe() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fallbackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    const revealFallback = () => {
+      if (fallbackRef.current) fallbackRef.current.dataset["visible"] = "true";
+    };
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    } catch {
+      revealFallback();
+      return;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
     const initialWidth = Math.max(canvas.clientWidth, 1);
     const initialHeight = Math.max(canvas.clientHeight, 1);
@@ -115,6 +125,7 @@ export function FinancialGlobe() {
     scene.add(rimLight);
 
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let renderFailed = false;
     let frame = 0;
     let scrollProgress = 0;
     let scrollFrame = 0;
@@ -131,7 +142,14 @@ export function FinancialGlobe() {
           orbit.rotation.z += (index === 1 ? -1 : 1) * 0.00045;
         });
       }
-      renderer.render(scene, camera);
+      if (!renderFailed) {
+        try {
+          renderer.render(scene, camera);
+        } catch {
+          renderFailed = true;
+          revealFallback();
+        }
+      }
       frame = window.requestAnimationFrame(render);
     };
     const onScroll = () => {
@@ -170,5 +188,16 @@ export function FinancialGlobe() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="financial-globe" aria-hidden="true" />;
+  return (
+    <>
+      <div className="globe-fallback" ref={fallbackRef} aria-hidden="true">
+        <span className="fallback-globe-grid" />
+        <span className="fallback-orbit fallback-orbit-one" />
+        <span className="fallback-orbit fallback-orbit-two" />
+        <span className="fallback-orbit fallback-orbit-three" />
+        <span className="fallback-globe-center">F</span>
+      </div>
+      <canvas ref={canvasRef} className="financial-globe" aria-hidden="true" />
+    </>
+  );
 }
