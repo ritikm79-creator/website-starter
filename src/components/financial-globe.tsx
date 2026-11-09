@@ -10,7 +10,7 @@ export function FinancialGlobe() {
     if (!canvas) return;
 
     const revealFallback = () => {
-      if (fallbackRef.current) fallbackRef.current.dataset.visible = "true";
+      if (fallbackRef.current) fallbackRef.current.dataset["visible"] = "true";
     };
     let renderer: THREE.WebGLRenderer;
     try {
